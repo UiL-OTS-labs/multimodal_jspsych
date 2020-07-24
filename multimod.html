@@ -8,6 +8,7 @@
     <script src="jspsych-6/plugins/jspsych-html-keyboard-response.js"></script>
     <script src="jspsych-6/plugins/jspsych-html-button-response.js"></script>
     <script src="jspsych-6/plugins/jspsych-image-keyboard-response.js"></script>
+    <script src="jspsych-6/plugins/jspsych-video-button-response.js"></script>
     <script src="js/tutorial.js"></script>
     <link rel="stylesheet" href="jspsych-6/css/jspsych.css"></link>
     <link rel="stylesheet" href="css_extra/image-button.css"></link>
@@ -83,7 +84,7 @@
             post_trial_gap: 1000
         };
 
-        timeline.push(instructions);
+        // timeline.push(instructions);
 
         var fixation = {
             type: 'html-keyboard-response',
@@ -119,7 +120,7 @@
             randomize_order: true
         };
         
-        timeline.push(tut_learn_procedure)
+        //timeline.push(tut_learn_procedure)
 
         var start_tut_train = {
             type: 'html-button-response',
@@ -131,7 +132,7 @@
         };
         
 
-        timeline.push(start_tut_train)
+        // timeline.push(start_tut_train)
         
         
         var three_target = {
@@ -197,7 +198,7 @@
             randomize_order: true
         };
         
-        timeline.push(tut_pract_procedure);
+        // timeline.push(tut_pract_procedure);
         
         var start_real_train = {
             type: 'html-button-response',
@@ -208,7 +209,7 @@
             response_ends_trial: true
         };
         
-        timeline.push(start_real_train)
+        // timeline.push(start_real_train)
         
         var three_target_learn = {
             type: 'audio-button-response',
@@ -253,11 +254,11 @@
         };
         
         // five runs for learning One
-        timeline.push(test_learn_procedure_one);
-        timeline.push(test_learn_procedure_one);
-        timeline.push(test_learn_procedure_one);
-        timeline.push(test_learn_procedure_one);
-        timeline.push(test_learn_procedure_one);
+        // timeline.push(test_learn_procedure_one);
+        // timeline.push(test_learn_procedure_one);
+        // timeline.push(test_learn_procedure_one);
+        // timeline.push(test_learn_procedure_one);
+        // timeline.push(test_learn_procedure_one);
 
 
 
@@ -268,7 +269,7 @@
             response_ends_trial: true
         };
 
-        timeline.push(start_pract_one_screen);
+        // timeline.push(start_pract_one_screen);
 
 
         var three_target_test = {
@@ -315,10 +316,10 @@
         };
 
         // four of these for testing/training
-        timeline.push(test_pract_procedure_one);
-        timeline.push(test_pract_procedure_one);
-        timeline.push(test_pract_procedure_one);
-        timeline.push(test_pract_procedure_one);
+        // timeline.push(test_pract_procedure_one);
+        // timeline.push(test_pract_procedure_one);
+        // timeline.push(test_pract_procedure_one);
+        // timeline.push(test_pract_procedure_one);
 
         // Block 2
 
@@ -329,7 +330,7 @@
             response_ends_trial: true
         };
 
-        timeline.push(start_learn_two_screen);
+        // timeline.push(start_learn_two_screen);
 
         var test_learn_procedure_two = {
             timeline:[fixation, three_target_learn, single_target_learn],
@@ -338,11 +339,11 @@
         };   
 
         // five runs for learning Block 2
-        timeline.push(test_learn_procedure_two);
-        timeline.push(test_learn_procedure_two);
-        timeline.push(test_learn_procedure_two);
-        timeline.push(test_learn_procedure_two);
-        timeline.push(test_learn_procedure_two);
+        // timeline.push(test_learn_procedure_two);
+        // timeline.push(test_learn_procedure_two);
+        // timeline.push(test_learn_procedure_two);
+        // timeline.push(test_learn_procedure_two);
+        // timeline.push(test_learn_procedure_two);
 
         var start_pract_two_screen = {
             type: 'html-button-response',
@@ -351,7 +352,7 @@
             response_ends_trial: true
         };
 
-        timeline.push(start_pract_two_screen);
+        //timeline.push(start_pract_two_screen);
 
         var test_pract_procedure_two = {
             timeline:[fixation, three_target_test, feedback],
@@ -359,10 +360,27 @@
             randomize_order: true,
         };   
         // 4 runs for testing/practicing
-        timeline.push(test_pract_procedure_two);
-        timeline.push(test_pract_procedure_two);
-        timeline.push(test_pract_procedure_two);
-        timeline.push(test_pract_procedure_two);
+        // timeline.push(test_pract_procedure_two);
+        // timeline.push(test_pract_procedure_two);
+        // timeline.push(test_pract_procedure_two);
+        // timeline.push(test_pract_procedure_two);
+        
+        // block three, all the same, im not a xerox
+
+        // Work on the neutral only video part, i'm not a copy-machine... three....
+
+        var test_video_trial = {
+            type: 'video-button-response',
+             sources: [
+                '_video/ma1h.mp4',
+                '_video/ma1h.ogg'
+                ],
+            choices: ['Happy','Sad','Angry','Peaceful'],
+            prompt: '<p>Which emotion the best descriptor of the main character\'s feelings?</p>'
+        };
+
+        timeline.push(test_video_trial)
+
 
         var end_screen = {
             type: 'html-keyboard-response',
