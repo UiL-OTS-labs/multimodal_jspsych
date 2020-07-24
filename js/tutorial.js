@@ -69,7 +69,7 @@ var learn_trial_info_one = [
         choices:["_a1","_b2","_c3"],
         correct_response:0,
         condition: "Tone 1",
-        task_part: "test_pract"
+        task_part: "test_learn"
     },
     {
         target: "b2",
@@ -80,7 +80,7 @@ var learn_trial_info_one = [
         choices:["_a1","_b2","_c3"],
         correct_response:1,
         condition: "Tone 2",
-        task_part: "test_pract"
+        task_part: "test_learn"
     },
     {
         target: "c3",
@@ -91,7 +91,7 @@ var learn_trial_info_one = [
         choices:["_a1","_b2","_c3"],
         correct_response:2,
         condition: "Tone 3",
-        task_part: "test_pract"
+        task_part: "test_learn"
     }
 ];
 
@@ -103,7 +103,7 @@ var learn_trial_info_one = [
         other_im_a:"_image/_b1i.png",
         other_im_b:"_image/_a3i.png",
         choices:["_a3","_b1","_c2"],
-        correct_response:0,
+        correct_response:2,
         condition: "Tone 2",
         task_part: "test_learn"
     },
@@ -125,7 +125,7 @@ var learn_trial_info_one = [
         other_im_a:"_image/_b1i.png",
         other_im_b:"_image/_c2i.png",
         choices:["_a3","_b1","_c2"],
-        correct_response:2,
+        correct_response:0,
         condition: "Tone 3",
         task_part: "test_learn"
     }

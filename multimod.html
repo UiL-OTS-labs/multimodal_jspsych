@@ -17,19 +17,17 @@
 
         var timeline = [];
 
-        // shorthand for the js var called tu
+        // shorthand for the "js/tutorial.js" additional structure
         var tut_learn = tut_learn_trial_info
         var tut_pract = tut_pract_trial_info 
-        var test_learn = learn_trial_info_one
-        var test_pract = learn_trial_info_one        
-        var test_beep = ['_audio/beep.mp3']
-        
-        // var sofar = tut_learn.length + tut_pract.length + test_learn
+        // learning & testing Block 1 (same  trial info)
+        var test_learn_one = learn_trial_info_one
+        var test_pract_one = learn_trial_info_one  
+        //  Block 2 leaning and testing
+        var test_learn_two = learn_trial_info_two
+        var test_pract_two = learn_trial_info_two
 
-        // create list of all audio files for preloading
-        // var all_audio = [];
-        // for (var i=0; i<practice_trial_info.length; i++) {
-        //     all_audio.push(practice_trial_info[i].target_audio);
+        var test_beep = ['_audio/beep.mp3']
 
         // create list of all audio files for preloading
         var tut_pract_audio = [];
@@ -44,10 +42,28 @@
             console.log('loaded tutorial learn audio')
         };
 
-        var test_learn_audio = [];
-        for (var i=0; i<test_learn.length; i++) {
-            test_learn_audio.push(test_learn[i].target_audio);
-            console.log('loaded learn audio')
+        var test_learn_one_audio = [];
+        for (var i=0; i<test_learn_one.length; i++) {
+            test_learn_one_audio.push(test_learn_one[i].target_audio);
+            console.log('loaded learn one audio')
+        };
+
+        var test_pract_one_audio = [];
+        for (var i=0; i<test_pract_one.length; i++) {
+            test_pract_one_audio.push(test_pract_one[i].target_audio);
+            console.log('loaded pract one audio')
+        };
+
+        var test_learn_two_audio = [];
+        for (var i=0; i<test_learn_two.length; i++) {
+            test_learn_two_audio.push(test_learn_two[i].target_audio);
+            console.log('loaded learn two audio')
+        };
+
+        var test_pract_two_audio = [];
+        for (var i=0; i<test_pract_two.length; i++) {
+            test_pract_two_audio.push(test_pract_two[i].target_audio);
+            console.log('loaded learn two audio')
         };
 
         var test_learn_beep_audio = [];
@@ -55,13 +71,6 @@
             test_learn_beep_audio.push(test_beep[i]);
             console.log('loaded learn beep audio')
         };
-
-        // var all_audio = [];
-        // for (var i=0; i<tut_learn.length+; i++) {
-        //     all_audio.push(tut_learn[i].target_audio);
-        //     console.log('loaded tutorial audio')
-        // }
-
 
         var instructions = {
             type: 'instructions',
@@ -74,7 +83,7 @@
             post_trial_gap: 1000
         };
 
-        timeline.push(instructions);
+        //timeline.push(instructions);
 
         var fixation = {
             type: 'html-keyboard-response',
@@ -94,7 +103,7 @@
             prompt: function() {
                 return '<img src = "'+ jsPsych.timelineVariable('target_image', true) +'" >'},
             trial_ends_after_audio: false,
-            trial_duration: 2000,
+            trial_duration: 4000,
             data: {
                 target_audio: jsPsych.timelineVariable('target_audio'),
                 target_image: jsPsych.timelineVariable('target_image'),
@@ -110,7 +119,7 @@
             randomize_order: true
         };
         
-         timeline.push(tut_learn_procedure)
+        //timeline.push(tut_learn_procedure)
 
         var start_tut_train = {
             type: 'html-button-response',
@@ -122,7 +131,7 @@
         };
         
 
-        timeline.push(start_tut_train)
+        //timeline.push(start_tut_train)
         
         
         var three_target = {
@@ -188,7 +197,7 @@
             randomize_order: true
         };
         
-        timeline.push(tut_pract_procedure);
+        //timeline.push(tut_pract_procedure);
         
         var start_real_train = {
             type: 'html-button-response',
@@ -237,30 +246,25 @@
         }; 
         
 
-
-        //var shuffled_learn = jsPsych.randomiser.repeat(learn_block_one_list, 5);
-
-        // this might be better
-        var factors = {
-            stimulus: ['_image/_a1i.png', '_image/_b2i.png','_image/_c3i.png'],
-            audio: ['_audio/_a1s.wav', '_audio/_b2s.wav','_audio/_c2s.wav'],
-            type:['audio-button-response','audio-button-response']
-        }
-
-        // var full_design = jsPsych.randomization.factorial(factors, 1);
-        // console.log(full_design)
-
-        var learn_procedure = {
+        var test_learn_procedure_one = {
             timeline:[fixation, three_target_learn, single_target_learn],
-            timeline_variables: test_learn,
+            timeline_variables: test_learn_one,
             randomize_order: true,
         };
         
+        // five runs for learning One
+        timeline.push(test_learn_procedure_one);
+        timeline.push(test_learn_procedure_one);
+        
 
-        timeline.push(learn_procedure);
-        timeline.push(learn_procedure);
-        timeline.push(learn_procedure);
+        var start_pract_one_screen = {
+            type: 'html-button-response',
+            stimulus: "Okay, now let's see how you like to PERFORM on block 1!", 
+            choices: ['FUNKY'],
+            response_ends_trial: true
+        };
 
+        timeline.push(start_pract_one_screen);
 
 
         var three_target_test = {
@@ -290,8 +294,6 @@
                 var used_button = data.button_pressed;
                 var given_response = jsPsych.timelineVariable('choices')[used_button];
                 
-                // console.log(three_target.choices[data.button_pressed]);
-                // console.log(given_response);
                 
                 if (data.correct_response == data.button_pressed) {
                     acc = true;
@@ -302,19 +304,59 @@
         }; 
 
 
-        var test_pract_procedure = {
+        var test_pract_procedure_one = {
             timeline: [three_target_test, feedback],
-            timeline_variables: test_pract,
+            timeline_variables: test_pract_one,
             randomize_order: true
         };
 
-        timeline.push(test_pract_procedure);
-        timeline.push(test_pract_procedure);
-        timeline.push(test_pract_procedure);
+        // four of these for testing/training
+        timeline.push(test_pract_procedure_one);
+        timeline.push(test_pract_procedure_one);
+        
+        // Block 2
+
+        var start_learn_two_screen = {
+            type: 'html-button-response',
+            stimulus: "New passive learning block, you don't have to press or click after...", 
+            choices: ['THIS'],
+            response_ends_trial: true
+        };
+
+        timeline.push(start_learn_two_screen);
+
+        var test_learn_procedure_two = {
+            timeline:[fixation, three_target_learn, single_target_learn],
+            timeline_variables: test_learn_two,
+            randomize_order: true,
+        };   
+
+        // five runs for learning Block 2
+        timeline.push(test_learn_procedure_two);
+        timeline.push(test_learn_procedure_two);
+
+
+        var start_pract_two_screen = {
+            type: 'html-button-response',
+            stimulus: "Okay, now let's see how you like to PERFORM on block 2!", 
+            choices: ['FUNKY FUNKY'],
+            response_ends_trial: true
+        };
+
+        timeline.push(start_pract_two_screen);
+
+        var test_pract_procedure_two = {
+            timeline:[fixation, three_target_test, feedback],
+            timeline_variables: test_pract_two,
+            randomize_order: true,
+        };   
+        // 4 runs for testing/practicing
+        timeline.push(test_pract_procedure_two);
+        timeline.push(test_pract_procedure_two);
 
         var end_screen = {
             type: 'html-keyboard-response',
-            stimulus: "Thanks, you're done with the task!", 
+            stimulus: "Thanks, you're done. Press spacebar to see data", 
             choices: ['space']
         };
         
@@ -322,7 +364,15 @@
 
         jsPsych.init({
             timeline: timeline,
-            preload_audio: [tut_learn_audio, tut_pract_audio,test_learn_audio, test_learn_beep_audio],
+            preload_audio: [
+                tut_learn_audio, 
+                tut_pract_audio,
+                test_learn_one_audio, 
+                test_pract_one_audio,
+                test_learn_two_audio, 
+                test_pract_two_audio,
+                test_learn_beep_audio,
+                ],
             show_preload_progress_bar: true,
             use_webaudio: false,
             on_finish: function() {
