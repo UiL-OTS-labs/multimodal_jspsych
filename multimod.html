@@ -83,7 +83,7 @@
             post_trial_gap: 1000
         };
 
-        //timeline.push(instructions);
+        timeline.push(instructions);
 
         var fixation = {
             type: 'html-keyboard-response',
@@ -119,7 +119,7 @@
             randomize_order: true
         };
         
-        //timeline.push(tut_learn_procedure)
+        timeline.push(tut_learn_procedure)
 
         var start_tut_train = {
             type: 'html-button-response',
@@ -131,7 +131,7 @@
         };
         
 
-        //timeline.push(start_tut_train)
+        timeline.push(start_tut_train)
         
         
         var three_target = {
@@ -197,7 +197,7 @@
             randomize_order: true
         };
         
-        //timeline.push(tut_pract_procedure);
+        timeline.push(tut_pract_procedure);
         
         var start_real_train = {
             type: 'html-button-response',
@@ -255,7 +255,11 @@
         // five runs for learning One
         timeline.push(test_learn_procedure_one);
         timeline.push(test_learn_procedure_one);
-        
+        timeline.push(test_learn_procedure_one);
+        timeline.push(test_learn_procedure_one);
+        timeline.push(test_learn_procedure_one);
+
+
 
         var start_pract_one_screen = {
             type: 'html-button-response',
@@ -313,7 +317,9 @@
         // four of these for testing/training
         timeline.push(test_pract_procedure_one);
         timeline.push(test_pract_procedure_one);
-        
+        timeline.push(test_pract_procedure_one);
+        timeline.push(test_pract_procedure_one);
+
         // Block 2
 
         var start_learn_two_screen = {
@@ -334,7 +340,9 @@
         // five runs for learning Block 2
         timeline.push(test_learn_procedure_two);
         timeline.push(test_learn_procedure_two);
-
+        timeline.push(test_learn_procedure_two);
+        timeline.push(test_learn_procedure_two);
+        timeline.push(test_learn_procedure_two);
 
         var start_pract_two_screen = {
             type: 'html-button-response',
@@ -351,6 +359,8 @@
             randomize_order: true,
         };   
         // 4 runs for testing/practicing
+        timeline.push(test_pract_procedure_two);
+        timeline.push(test_pract_procedure_two);
         timeline.push(test_pract_procedure_two);
         timeline.push(test_pract_procedure_two);
 
