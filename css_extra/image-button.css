@@ -1,0 +1,48 @@
+/* borrowing Bootstrap style for btn elements, but combining styles a bit */
+.img-btn {
+  display: inline-block;
+  padding: 6px 12px;
+  margin: 0px;
+  height: 200px;
+  width: 200px;
+
+  cursor: pointer;
+  line-height: 1.4;
+  background-image: url( '_image/%choice%i.png' )
+  white-space: nowrap;
+  vertical-align: middle;
+  border: none;
+  color: #333;
+  background-color: #fff;
+}
+
+.img-btn:hover {
+  background-color: #ddd;
+  border-color: #aaa;
+}
+
+/* 
+button {
+    display: inline-block;
+    height: 134px;
+    padding: 0;
+    margin: 0;
+    vertical-align: top;
+    width: 104px;
+}
+ */
+
+/* 
+#close-image img {
+    display: block;
+    height: 200px;  
+    width: 200px;
+}
+
+#close-CSS {
+    background-image: url( 'http://thinkingstiff.com/images/matt.jpg' );
+    background-size: 200px 200px;
+    height: 200px;  
+    width: 200px;
+}
+ */
