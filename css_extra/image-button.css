@@ -5,10 +5,9 @@
   margin: 0px;
   height: 200px;
   width: 200px;
-
   cursor: pointer;
   line-height: 1.4;
-  background-image: url( '_image/%choice%i.png' )
+  background-image: none; /* url( '../_image/tile.png' ); */
   white-space: nowrap;
   vertical-align: middle;
   border: none;
@@ -21,28 +20,46 @@
   border-color: #aaa;
 }
 
-/* 
-button {
-    display: inline-block;
-    height: 134px;
-    padding: 0;
-    margin: 0;
-    vertical-align: top;
-    width: 104px;
-}
- */
-
-/* 
-#close-image img {
-    display: block;
-    height: 200px;  
-    width: 200px;
+.img-btn-small {
+  display: inline-block;
+  padding: 6px 12px;
+  margin: 0px;
+  height:100px;
+  width: 100px;
+  cursor: pointer;
+  line-height: 1.1;
+  background-image: none; /* url( '../_image/tile.png' ); */
+  white-space: nowrap;
+  vertical-align: middle;
+  border: none;
+  color: #333;
+  background-color: #fff;
 }
 
-#close-CSS {
-    background-image: url( 'http://thinkingstiff.com/images/matt.jpg' );
-    background-size: 200px 200px;
-    height: 200px;  
-    width: 200px;
+.img-btn-small:hover {
+  background-color: #ddd;
+  border-color: #aaa; 
 }
- */
+
+* {box-sizing: border-box;}
+
+.wrapper {
+    border: 2px solid #f76707;
+    border-radius: 5px;
+    background-color: #fff4e6;
+}
+
+.wrapper > div {
+    border: 2px solid #ffa94d;
+    border-radius: 5px;
+    background-color: #ffd8a8;
+    padding: 1em;
+    color: #d9480f;
+}
+
+.wrapper {
+  display: grid;
+  grid-template-columns: repeat(1fr, 3);
+  grid-gap: 10px;
+}
+

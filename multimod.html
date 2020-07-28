@@ -9,6 +9,7 @@
     <script src="jspsych-6/plugins/jspsych-html-button-response.js"></script>
     <script src="jspsych-6/plugins/jspsych-image-keyboard-response.js"></script>
     <script src="jspsych-6/plugins/jspsych-video-button-response.js"></script>
+    <script src="jspsych-6/plugins/jspsych-vsl-grid-scene.js"></script>
     <script src="js/tutorial.js"></script>
     <link rel="stylesheet" href="jspsych-6/css/jspsych.css"></link>
     <link rel="stylesheet" href="css_extra/image-button.css"></link>
@@ -27,6 +28,8 @@
         //  Block 2 leaning and testing
         var test_learn_two = learn_trial_info_two
         var test_pract_two = learn_trial_info_two
+
+        var test_nine_one = nine_trial_info;
 
         var test_beep = ['_audio/beep.mp3']
 
@@ -73,6 +76,12 @@
             console.log('loaded learn beep audio')
         };
 
+        var test_nine_one_audio = [];
+        for (var i=0; i<test_pract_two.length; i++) {
+            test_nine_one_audio.push(test_nine_one[i].target_audio);
+            console.log('loaded nine choices audio')
+        };
+
         var instructions = {
             type: 'instructions',
             pages: [
@@ -84,7 +93,7 @@
             post_trial_gap: 1000
         };
 
-        // timeline.push(instructions);
+        timeline.push(instructions);
 
         var fixation = {
             type: 'html-keyboard-response',
@@ -304,7 +313,7 @@
                     acc = true;
                 }
                 data.accuracy = acc;
-                console.log(data.accuracy)
+                //console.log(data.accuracy)
             }
         }; 
 
@@ -316,7 +325,7 @@
         };
 
         // four of these for testing/training
-        // timeline.push(test_pract_procedure_one);
+        //timeline.push(test_pract_procedure_one);
         // timeline.push(test_pract_procedure_one);
         // timeline.push(test_pract_procedure_one);
         // timeline.push(test_pract_procedure_one);
@@ -339,7 +348,7 @@
         };   
 
         // five runs for learning Block 2
-        // timeline.push(test_learn_procedure_two);
+        //timeline.push(test_learn_procedure_two);
         // timeline.push(test_learn_procedure_two);
         // timeline.push(test_learn_procedure_two);
         // timeline.push(test_learn_procedure_two);
@@ -359,6 +368,7 @@
             timeline_variables: test_pract_two,
             randomize_order: true,
         };   
+
         // 4 runs for testing/practicing
         // timeline.push(test_pract_procedure_two);
         // timeline.push(test_pract_procedure_two);
@@ -369,17 +379,127 @@
 
         // Work on the neutral only video part, i'm not a copy-machine... three....
 
-        var test_video_trial = {
-            type: 'video-button-response',
-             sources: [
-                '_video/ma1h.mp4',
-                '_video/ma1h.ogg'
-                ],
-            choices: ['Happy','Sad','Angry','Peaceful'],
-            prompt: '<p>Which emotion the best descriptor of the main character\'s feelings?</p>'
+        // var test_video_trial = {
+        //     type: 'video-button-response',
+        //      sources: [
+        //         '_video/ma1h.mp4',
+        //         '_video/ma1h.ogg'
+        //         ],
+        //     choices: ['Happy','Sad','Angry','Peaceful'],
+        //     autoplay: true,
+        //     prompt: '<p>Which emotion the best descriptor of the main character\'s feelings?</p>'
+        // };
+
+        // timeline.push(test_video_trial)
+
+        // var nine_target_learn = {
+        //     type: 'audio-button-response',
+        //     stimulus: jsPsych.timelineVariable('target_audio'),
+        //     choices: jsPsych.timelineVariable('choices'),
+        //     button_html: [
+        //         '<button class="img-btn-small"><img src=_image/%choice%i.png></button>',
+        //         '<button class="img-btn-small"><img src=_image/%choice%i.png></button>',
+        //         '<button class="img-btn-small"><img src=_image/%choice%i.png></button>',
+        //         '<button class="img-btn-small"><img src=_image/%choice%i.png></button>',
+        //         '<button class="img-btn-small"><img src=_image/%choice%i.png></button>',
+        //         '<button class="img-btn-small"><img src=_image/%choice%i.png></button>',
+        //         '<button class="img-btn-small"><img src=_image/%choice%i.png></button>',
+        //         '<button class="img-btn-small"><img src=_image/%choice%i.png></button>',
+        //         '<button class="img-btn-small"><img src=_image/%choice%i.png></button>',
+        //         ],
+        //     prompt: "<p>i show you all...</p>",
+        //     trial_ends_after_audio: false,
+        //     trial_duration: 4000,
+        //     data: {
+        //         target_audio: jsPsych.timelineVariable('target_audio'),
+        //         target_image: jsPsych.timelineVariable('target_image'),
+        //         condition: jsPsych.timelineVariable('condition'),
+        //         trial_part: 'nine_target_test',
+        //         task_part: jsPsych.timelineVariable('task_part'),
+        //         correct_response : jsPsych.timelineVariable('correct_response')
+        //     },
+
+        var pattern = [ 
+            ["_image/_a1i.png", "_image/_a2i.png", "_image/_a3i.png"],
+            ["_image/_b1i.png", "_image/_b2i.png","_image/_a3i.png"],
+            ["_image/_c1i.png", "_image/_c2i.png","_image/_c3i.png"]
+        ];
+
+        var image_size = 100; // pixels
+
+        var grid_stimulus = jsPsych.plugins['vsl-grid-scene'].generate_stimulus(pattern, image_size);
+
+        // var bhtml = '<div class="wrapper">'
+        //     bhtml += '<div><button><img src=_image/%choice%i.png></button></div>'
+        //     bhtml += '<div><button><img src=_image/%choice%i.png></button></div>'
+        //     bhtml += '<div><button><img src=_image/%choice%i.png></button></div>'
+        //     bhtml += '</div>';
+
+        var bhtml = '<div class="wrapper">'
+            bhtml += '<div><div><button><img src=_image/%choice%i.png></button></div></div>'
+            bhtml += '</div>';
+
+        // var bhtml = '<div class="wrapper">'
+        //     bhtml += '<div><button><img src=_image/%choice%i.png></button></div>'
+        //     bhtml += '</div>';   
+
+        var nine_target_learn = {
+            type: 'audio-button-response',
+            stimulus: jsPsych.timelineVariable('target_audio'),
+            choices: jsPsych.timelineVariable('choices'),
+            // button_html:
+            //     '<button class="img-btn-small"><img src=_image/%choice%i.png></button>',
+            button_html: bhtml,
+            prompt: "<p>i show you some...</p>",
+            trial_ends_after_audio: false,
+            trial_duration: 4000,
+            data: {
+                target_audio: jsPsych.timelineVariable('target_audio'),
+                target_image: jsPsych.timelineVariable('target_image'),
+                condition: jsPsych.timelineVariable('condition'),
+                trial_part: 'nine_target_test',
+                task_part: jsPsych.timelineVariable('task_part'),
+                correct_response : jsPsych.timelineVariable('correct_response')
+            },
+
+            // on_start: function() {
+            //     var buttons = document.getElementsByClassName('img-btn-small');
+            //     console.log(buttons)
+            //     buttons.height = '20px';
+            //     buttons.width = '20px';
+            //     console.log("small buttons?...");
+            // },
+
+            on_finish: function(data) {
+                var acc = false;
+                var used_button = data.button_pressed;
+                var given_response = jsPsych.timelineVariable('choices')[used_button];
+                
+                if (data.correct_response == data.button_pressed) {
+                    acc = true;
+                }
+                data.accuracy = acc;
+                console.log(data.accuracy)
+            }
+        }; 
+
+
+// pass into other plugins that accept HTML stimuli as input, such as jspsych-html-keyboard-response.
+
+        // var button_downsize = function(){
+        //     var buts = document.getElementById('img-btn');
+        //     buts.style.height = '40px';
+        //     console.log("i'm a dork...");
+        // };
+
+        var test_nine_procedure_one = {
+            timeline:[nine_target_learn],
+            timeline_variables: test_nine_one,
+            randomize_order: true,
         };
 
-        timeline.push(test_video_trial)
+        timeline.push(test_nine_procedure_one);
+
 
 
         var end_screen = {
@@ -400,8 +520,9 @@
                 test_learn_two_audio, 
                 test_pract_two_audio,
                 test_learn_beep_audio,
+                test_nine_one_audio,
                 ],
-            show_preload_progress_bar: true,
+            show_preload_progress_bar: false,
             use_webaudio: false,
             on_finish: function() {
                 jsPsych.data.displayData();
