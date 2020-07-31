@@ -137,6 +137,7 @@ var nine_trial_info = [
         target: "a1",
         target_image: "_image/_a1i.png",
         target_audio: "_audio/_a1s.wav",
+        target_video: "_video/ma1n.mp4",
         other_im_1:"_image/_a2i.png",
         other_im_2:"_image/_a3i.png",
         other_im_3:"_image/_b1i.png",
@@ -154,6 +155,7 @@ var nine_trial_info = [
         target: "a2",
         target_image: "_image/_a2i.png",
         target_audio: "_audio/_a2s.wav",
+        target_video: "_video/ma2n.mp4",
         other_im_1:"_image/_a1i.png",
         other_im_2:"_image/_a3i.png",
         other_im_3:"_image/_b1i.png",
@@ -171,6 +173,7 @@ var nine_trial_info = [
         target: "a3",
         target_image: "_image/_a3i.png",
         target_audio: "_audio/_a3s.wav",
+        target_video: "_video/ma4n.mp4",
         other_im_1:"_image/_a1i.png",
         other_im_2:"_image/_a2i.png",
         other_im_3:"_image/_b1i.png",
@@ -188,6 +191,7 @@ var nine_trial_info = [
         target: "b1",
         target_image: "_image/_b1i.png",
         target_audio: "_audio/_b1s.wav",
+        target_video: "_video/ne1n.mp4",        
         other_im_1:"_image/_a1i.png",
         other_im_2:"_image/_a2i.png",
         other_im_3:"_image/_a3i.png",
@@ -205,6 +209,7 @@ var nine_trial_info = [
         target: "b2",
         target_image: "_image/_b2i.png",
         target_audio: "_audio/_b2s.wav",
+        target_video: "_video/ne2n.mp4", 
         other_im_1:"_image/_a1i.png",
         other_im_2:"_image/_a2i.png",
         other_im_3:"_image/_a3i.png",
@@ -222,6 +227,7 @@ var nine_trial_info = [
         target: "b3",
         target_image: "_image/_b3i.png",
         target_audio: "_audio/_b3s.wav",
+        target_video: "_video/ne4n.mp4", 
         other_im_1:"_image/_a1i.png",
         other_im_2:"_image/_a2i.png",
         other_im_3:"_image/_a3i.png",
@@ -239,6 +245,7 @@ var nine_trial_info = [
         target: "c1",
         target_image: "_image/_c1i.png",
         target_audio: "_audio/_c1s.wav",
+        target_video: "_video/yi1n.mp4", 
         other_im_1:"_image/_a1i.png",
         other_im_2:"_image/_a2i.png",
         other_im_3:"_image/_a3i.png",
@@ -256,6 +263,7 @@ var nine_trial_info = [
         target: "c2",
         target_image: "_image/_c2i.png",
         target_audio: "_audio/_c2s.wav",
+        target_video: "_video/yi2n.mp4",        
         other_im_1:"_image/_a1i.png",
         other_im_2:"_image/_a2i.png",
         other_im_3:"_image/_a3i.png",
@@ -273,6 +281,7 @@ var nine_trial_info = [
         target: "c3",
         target_image: "_image/_c3i.png",
         target_audio: "_audio/_c3s.wav",
+        target_video: "_video/yi4n.mp4", 
         other_im_1:"_image/_a1i.png",
         other_im_2:"_image/_a2i.png",
         other_im_3:"_image/_a3i.png",
@@ -288,6 +297,34 @@ var nine_trial_info = [
     }   
 ];
 
+// var nine_button_fixed_pairs: [
+//             {0:"_image/_a1i.png"},
+//             {1:"_image/_a2i.png"},
+//             {2:"_image/_a3i.png"},
+//             {3:"_image/_b1i.png"},
+//             {4,"_image/_b2i.png"},
+//             {5,"_image/_b3i.png"},
+//             {6,"_image/_c1i.png"},
+//             {7,"_image/_c2i.png"},
+//             {8,"_image/_c3i.png"}
+//             ]
+//             
+//         target_image: "_image/_c3i.png",
+//         target_audio: "_audio/_c3s.wav",
+//         other_im_1:"_image/_a1i.png",
+//         other_im_2:"_image/_a2i.png",
+//         other_im_3:"_image/_a3i.png",
+//         other_im_4:"_image/_b1i.png",
+//         other_im_5:"_image/_b2i.png",
+//         other_im_6:"_image/_b3i.png",
+//         other_im_7:"_image/_c1i.png",
+//         other_im_8:"_image/_c2i.png",
+//         choices:["_a1","_a2","_a3","_b1","_b2","_b3","_c1","_c2","_c3"],
+//         correct_response:8,
+//         condition: "Tone 4",
+//         task_part: "test_learn_nine"
+//     }   
+// ];
 // var button_downsize = function{
 //     var button = image-btn;
 //     button.style.height = '100px';
