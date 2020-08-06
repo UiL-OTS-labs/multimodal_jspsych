@@ -10,7 +10,9 @@
     <script src="jspsych-6/plugins/jspsych-image-keyboard-response.js"></script>
     <script src="jspsych-6/plugins/jspsych-video-button-response.js"></script>
     <script src="jspsych-6/plugins/jspsych-video-keyboard-response.js"></script>
+    <script src="jspsych-6/plugins/jspsych-call-function.js"></script>
     <script src="js/tutorial.js"></script>
+    <script src="audio-button-response-random.js"></script>
     <link rel="stylesheet" href="jspsych-6/css/jspsych.css"></link>
     <link rel="stylesheet" href="css_extra/image-button.css"></link>
   </head>
@@ -370,7 +372,7 @@
             response_ends_trial: true
         };
 
-        timeline.push(start_pract_two_screen);
+        //timeline.push(start_pract_two_screen);
 
         var test_pract_procedure_two = {
             timeline:[fixation, three_target_test, feedback],
@@ -429,10 +431,10 @@
 
 
         var nine_target_show = {
-            type: 'audio-button-response',
+            type: 'audio-button-response-random',
             stimulus: '_audio/beep.mp3',
             choices: jsPsych.timelineVariable('choices'),
-            button_html: buttons5,
+            button_html: buttons2,
             prompt: "<p>get ready for video</p>",
             trial_ends_after_audio: false,
             trial_duration: 3000,
@@ -443,8 +445,20 @@
                 trial_part: 'nine_target_test',
                 task_part: jsPsych.timelineVariable('task_part'),
                 correct_response : jsPsych.timelineVariable('correct_response')
-            }
-        };
+                }
+            };
+
+            // on_start: function(data) {
+
+            //     var fixedChoices = jsPsych.randomization.shuffle(Array.from(jsPsych.timelineVariable('choices')));
+            //     var fixedCorrect = jsPsych.timelineVariable('target');
+            //     console.log(fixedChoices);
+                
+            //     var {choiceList, index} = shuffleChoiceButtons(fixedChoices, fixedCorrect);
+            //     console.log(index);
+            //     console.log(data.accuracy);
+            // }
+
 
         var single_video_learn = {
             type: 'video-keyboard-response',
@@ -528,6 +542,91 @@
                 jsPsych.data.displayData();
             }
         })
+
+    // generic JS
+
+    // function shuffle(array) {
+    //   var currentIndex = array.length, temporaryValue, randomIndex;
+
+    //   // While there remain elements to shuffle...
+    //   while (0 !== currentIndex) {
+
+    //     // Pick a remaining element...
+    //     randomIndex = Math.floor(Math.random() * currentIndex);
+    //     currentIndex -= 1;
+
+    //     // And swap it with the current element.
+    //     temporaryValue = array[currentIndex];
+    //     array[currentIndex] = array[randomIndex];
+    //     array[randomIndex] = temporaryValue;
+    //   }
+
+    //   return array;
+    // }
+
+    // function shuffle(originalArray) {
+    //   var array = [].concat(originalArray);
+    //   var currentIndex = array.length, temporaryValue, randomIndex;
+
+    //   // While there remain elements to shuffle...
+    //   while (0 !== currentIndex) {
+
+    //     // Pick a remaining element...
+    //     randomIndex = Math.floor(Math.random() * currentIndex);
+    //     currentIndex -= 1;
+
+    //     // And swap it with the current element.
+    //     temporaryValue = array[currentIndex];
+    //     array[currentIndex] = array[randomIndex];
+    //     array[randomIndex] = temporaryValue;
+    //   }
+
+    //   return array;
+    // }   
+
+    // function shuffleChoiceButtons(choices, correct_choice_string) {
+    //   //check
+    //   console.log('pre-shuffled array:');
+    //   console.log(choices)
+      
+    //   //spec
+    //   var oriIndex = choices.indexOf(correct_choice_string);
+
+    //   //check
+    //   console.log('oriIndex: ');
+    //   console.log(oriIndex);
+      
+    //   var betterChoices = shuffle(choices);
+      
+    //   //check
+    //   console.log('post-shuffled:');
+    //   console.log(betterChoices);
+
+    //   var newIndex = betterChoices.indexOf(correct_choice_string);
+    //   console.log(newIndex);
+
+    //   return {
+    //     choiceList: betterChoices,
+    //     index: newIndex
+    //   };
+    // }
+
+
+    // function getArrayValues(collection: any[], path: (number | string)[] = []) {
+    //   return collection.map((value, index) => {
+    //   return getValue(value, [...path, index])
+    //  })
+    // }
+
+    // function getObjectValues(source: object, path: (number | string)[] = []) {
+    //  return Object.keys(source).map((key) => {
+    //    const value = source[key]
+
+    //    return getValue(value, [...path, key])
+    //  })
+    // }
+
+    //end generic stuff
 
     </script>
 </html>
