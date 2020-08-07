@@ -127,6 +127,8 @@ jsPsych.plugins["audio-button-response-random"] = (function() {
       //check
       console.log('pre-shuffled array:');
       console.log(array)
+      console.log('this is the correct answer...')
+      console.log(correctString)
       
       //spec
       var oriIndex = array.indexOf(correctString);
@@ -155,8 +157,12 @@ jsPsych.plugins["audio-button-response-random"] = (function() {
     var buttons = [];
     //
     var shuffledChoices = shuffleChoices(trial.choices);
-    var shuffledObject = choiceButtons(shuffledChoices, trial.target);
+
+    var shuffledObject = choiceButtons(shuffledChoices, trial.data.target);
+    console.log(trial.data.target)
     var correctButton = shuffledObject.index;
+    console.log('correctButton')
+    console.log(correctButton)
     
     if (Array.isArray(trial.button_html)) {
       if (trial.button_html.length == trial.choices.length) {
@@ -194,7 +200,8 @@ jsPsych.plugins["audio-button-response-random"] = (function() {
     // store response
     var response = {
       rt: null,
-      button: null
+      button: null,
+      correctIndex: correctButton
     };
 
     // function to handle responses by the subject
@@ -205,6 +212,7 @@ jsPsych.plugins["audio-button-response-random"] = (function() {
       var rt = end_time - start_time;
       response.button = choice;
       response.rt = rt;
+      response.correctIndex = correctButton
 
       // disable all the buttons after a response
       var btns = document.querySelectorAll('.jspsych-audio-button-response-button button');
@@ -238,7 +246,8 @@ jsPsych.plugins["audio-button-response-random"] = (function() {
       var trial_data = {
         "rt": response.rt,
         "stimulus": trial.stimulus,
-        "button_pressed": response.button
+        "button_pressed": response.button,
+        "correct_index": response.correctIndex
       };
 
       // clear the display

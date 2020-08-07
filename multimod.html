@@ -336,7 +336,7 @@
         };
 
         // four of these for testing/training
-        //timeline.push(test_pract_procedure_one);
+        timeline.push(test_pract_procedure_one);
         // timeline.push(test_pract_procedure_one);
         // timeline.push(test_pract_procedure_one);
         // timeline.push(test_pract_procedure_one);
@@ -359,7 +359,7 @@
         };   
 
         // five runs for learning Block 2
-        //timeline.push(test_learn_procedure_two);
+        timeline.push(test_learn_procedure_two);
         // timeline.push(test_learn_procedure_two);
         // timeline.push(test_learn_procedure_two);
         // timeline.push(test_learn_procedure_two);
@@ -372,7 +372,7 @@
             response_ends_trial: true
         };
 
-        //timeline.push(start_pract_two_screen);
+        timeline.push(start_pract_two_screen);
 
         var test_pract_procedure_two = {
             timeline:[fixation, three_target_test, feedback],
@@ -381,7 +381,7 @@
         };   
 
         // 4 runs for testing/practicing
-        // timeline.push(test_pract_procedure_two);
+        timeline.push(test_pract_procedure_two);
         // timeline.push(test_pract_procedure_two);
         // timeline.push(test_pract_procedure_two);
         // timeline.push(test_pract_procedure_two);
@@ -437,27 +437,17 @@
             button_html: buttons2,
             prompt: "<p>get ready for video</p>",
             trial_ends_after_audio: false,
-            trial_duration: 3000,
+            trial_duration: 1000,
             data: {
                 target_audio: jsPsych.timelineVariable('target_audio'),
                 target_image: jsPsych.timelineVariable('target_image'),
                 condition: jsPsych.timelineVariable('condition'),
                 trial_part: 'nine_target_test',
                 task_part: jsPsych.timelineVariable('task_part'),
-                correct_response : jsPsych.timelineVariable('correct_response')
-                }
-            };
-
-            // on_start: function(data) {
-
-            //     var fixedChoices = jsPsych.randomization.shuffle(Array.from(jsPsych.timelineVariable('choices')));
-            //     var fixedCorrect = jsPsych.timelineVariable('target');
-            //     console.log(fixedChoices);
-                
-            //     var {choiceList, index} = shuffleChoiceButtons(fixedChoices, fixedCorrect);
-            //     console.log(index);
-            //     console.log(data.accuracy);
-            // }
+                target: jsPsych.timelineVariable('target')
+                },
+        
+        }; 
 
 
         var single_video_learn = {
@@ -479,33 +469,67 @@
         }; 
 
         var nine_target_choose = {
-            type: 'html-button-response',
-            stimulus: '<p>Choose within 10 seconds</p>',
+            type: 'audio-button-response-random',
+            stimulus: '_audio/beep.mp3',
             choices: jsPsych.timelineVariable('choices'),
             button_html: buttons2,
-            prompt: "<p>Select the image that you think matches the video's sound</p>",
-            trial_duration: 5000,
-            response_ends_trial: true,
+            prompt: "<p>Select the correponding image, make a guess if you're unsure</p>",
+            trial_ends_after_audio: false,
+            trial_duration: 10000,
             data: {
                 target_audio: jsPsych.timelineVariable('target_audio'),
                 target_image: jsPsych.timelineVariable('target_image'),
-                target_video: jsPsych.timelineVariable('target_video'),
                 condition: jsPsych.timelineVariable('condition'),
                 trial_part: 'nine_target_choose_neutral',
                 task_part: jsPsych.timelineVariable('task_part'),
-                correct_response : jsPsych.timelineVariable('correct_response')
-            },
+                target: jsPsych.timelineVariable('target')
+                },
+
             on_finish: function(data) {
                 var acc = false;
                 var used_button = data.button_pressed;
                 var given_response = jsPsych.timelineVariable('choices')[used_button];
+                var correct_response = data.correct_index;
+                
                 
                 if (data.correct_response == data.button_pressed) {
                     acc = true;
                 }
                 data.accuracy = acc;
+                console.log('--------------------')
+                console.log(data.accuracy)
+                console.log('--------------------')
             }
-        };
+        };         
+
+        // var nine_target_choose = {
+        //     type: 'html-button-response',
+        //     stimulus: '<p>Choose within 10 seconds</p>',
+        //     choices: jsPsych.timelineVariable('choices'),
+        //     button_html: buttons2,
+        //     prompt: "<p>Select the image that you think matches the video's sound</p>",
+        //     trial_duration: 5000,
+        //     response_ends_trial: true,
+        //     data: {
+        //         target_audio: jsPsych.timelineVariable('target_audio'),
+        //         target_image: jsPsych.timelineVariable('target_image'),
+        //         target_video: jsPsych.timelineVariable('target_video'),
+        //         condition: jsPsych.timelineVariable('condition'),
+        //         trial_part: 'nine_target_choose_neutral',
+        //         task_part: jsPsych.timelineVariable('task_part'),
+        //         correct_response : jsPsych.timelineVariable('correct_response')
+        //     },
+        //     on_finish: function(data) {
+        //         var acc = false;
+        //         var used_button = data.button_pressed;
+        //         var given_response = jsPsych.timelineVariable('choices')[used_button];
+                
+        //         if (data.correct_response == data.button_pressed) {
+        //             acc = true;
+        //         }
+        //         data.accuracy = acc;
+        //     }
+        // };
 
         var test_nine_procedure_one = {
             timeline:[nine_target_show, single_video_learn, nine_target_choose],
