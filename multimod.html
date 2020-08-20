@@ -140,7 +140,7 @@
             randomize_order: true
         };
         
-        // timeline.push(tut_learn_procedure)
+        timeline.push(tut_learn_procedure)
 
         var start_tut_train = {
             type: 'html-button-response',
@@ -152,7 +152,7 @@
         };
         
 
-        // timeline.push(start_tut_train)
+        timeline.push(start_tut_train)
         
         
         var three_target = {
@@ -218,7 +218,7 @@
             randomize_order: true
         };
         
-        // timeline.push(tut_pract_procedure);
+        timeline.push(tut_pract_procedure);
         
         var start_real_train = {
             type: 'html-button-response',
@@ -274,7 +274,7 @@
         };
         
         // five runs for learning One
-        // timeline.push(test_learn_procedure_one);
+        timeline.push(test_learn_procedure_one);
         // timeline.push(test_learn_procedure_one);
         // timeline.push(test_learn_procedure_one);
         // timeline.push(test_learn_procedure_one);
@@ -289,7 +289,7 @@
             response_ends_trial: true
         };
 
-        //timeline.push(start_pract_one_screen);
+        timeline.push(start_pract_one_screen);
 
 
         var three_target_test = {
@@ -336,7 +336,7 @@
         };
 
         // four of these for testing/training
-        //timeline.push(test_pract_procedure_one);
+        timeline.push(test_pract_procedure_one);
         // timeline.push(test_pract_procedure_one);
         // timeline.push(test_pract_procedure_one);
         // timeline.push(test_pract_procedure_one);
@@ -381,7 +381,7 @@
         };   
 
         // 4 runs for testing/practicing
-        //timeline.push(test_pract_procedure_two);
+        timeline.push(test_pract_procedure_two);
         // timeline.push(test_pract_procedure_two);
         // timeline.push(test_pract_procedure_two);
         // timeline.push(test_pract_procedure_two);
@@ -434,15 +434,15 @@
             type: 'audio-button-response-random',
             stimulus: '_audio/beep.mp3',
             choices: jsPsych.timelineVariable('choices'),
-            button_html: buttons2,
-            prompt: "<p>get ready for video</p>",
+            button_html: '<button class="img-btn"><img src=_image/%choice%i.png></button>',
+            prompt: "<p>Get ready for video!</p>",
             trial_ends_after_audio: false,
             trial_duration: 1000,
             data: {
                 target_audio: jsPsych.timelineVariable('target_audio'),
                 target_image: jsPsych.timelineVariable('target_image'),
                 condition: jsPsych.timelineVariable('condition'),
-                trial_part: 'nine_target_test',
+                trial_part: 'nine_target_show',
                 task_part: jsPsych.timelineVariable('task_part'),
                 target: jsPsych.timelineVariable('target')
                 },
@@ -475,10 +475,10 @@
             type: 'audio-button-response-random',
             stimulus: '_audio/beep.mp3',
             choices: jsPsych.timelineVariable('choices'),
-            button_html: buttons2,
+            button_html: '<button class="img-btn"><img src=_image/%choice%i.png></button>',
             prompt: "<p>Select the correponding image, make a guess if you're unsure</p>",
             trial_ends_after_audio: false,
-            trial_duration: 10000,
+            trial_duration: 15000,
             data: {
                 target_audio: jsPsych.timelineVariable('target_audio'),
                 target_image: jsPsych.timelineVariable('target_image'),
@@ -496,7 +496,7 @@
 
                 console.log("post-shuffle correct button:\n");
                 console.log(correct_response);
-                console.log("pressed button:\n");
+                console.log("data.button_pressed");
                 console.log(data.button_pressed);
 
                 

@@ -117,6 +117,12 @@ img {
     margin: 5px;
 }
 
+#jspsych-html-button-response-btngroup {
+    display: grid;
+    grid-template-rows: calc(100% / 3) calc(100% / 3) calc(100% / 3);
+    grid-template-columns: calc(100% / 3) calc(100% / 3) calc(100% / 3);
+}
+
 /*.grid-container > div {
   background-color: rgba(255, 255, 255, 0.8);
   text-align: center;
