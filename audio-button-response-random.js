@@ -125,30 +125,31 @@ jsPsych.plugins["audio-button-response-random"] = (function() {
 
     function choiceButtons(array, correctString) {
       //check
-      //console.log('pre-shuffled array:');
-      //console.log(array)
-      //console.log('this is the correct answer...')
-      //console.log(correctString)
+      console.log('pre-shuffled array:');
+      console.log(array)
+      console.log('this is the correct answer...')
+      console.log(correctString)
       
       //spec
       var oriIndex = array.indexOf(correctString);
 
       //check
-      //console.log('oriIndex: ');
-      //console.log(oriIndex);
+      console.log('oriIndex: ');
+      console.log(oriIndex);
       
       var betterChoices = shuffleChoices(array);
       
       //check
-      //console.log('post-shuffled array:');
-      //console.log(betterChoices);
+      console.log('post-shuffled array:');
+      console.log(betterChoices);
 
       var newIndex = betterChoices.indexOf(correctString);
-      //console.log('newIndex: ');
-      //console.log(newIndex);
+      console.log('newIndex: ');
+      console.log(newIndex);
 
       return {
         choiceList: betterChoices,
+        indexOri: oriIndex,
         index: newIndex
       };
     }
@@ -162,8 +163,11 @@ jsPsych.plugins["audio-button-response-random"] = (function() {
     var shuffledObject = choiceButtons(shuffledChoices, trial.data.target);
     //console.log(trial.data.target)
     var correctButton = shuffledObject.index;
-    //console.log('correctButton')
-    //console.log(correctButton)
+
+    var oriButton = shuffledObject.indexOri;
+    
+    console.log('correctButton')
+    console.log(correctButton)
     
     if (Array.isArray(trial.button_html)) {
       if (trial.button_html.length == trial.choices.length) {
@@ -202,7 +206,7 @@ jsPsych.plugins["audio-button-response-random"] = (function() {
     var response = {
       rt: null,
       button: null,
-      correctIndex: correctButton
+      correctIndex: null,
     };
 
     // function to handle responses by the subject
@@ -248,7 +252,7 @@ jsPsych.plugins["audio-button-response-random"] = (function() {
         "rt": response.rt,
         "stimulus": trial.stimulus,
         "button_pressed": response.button,
-        "correct_index": response.correctIndex
+        "new_correct_index": response.correctIndex
       };
 
       // clear the display

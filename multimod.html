@@ -104,7 +104,7 @@
             post_trial_gap: 1000
         };
 
-        timeline.push(instructions);
+        //timeline.push(instructions);
 
         var fixation = {
             type: 'html-keyboard-response',
@@ -140,7 +140,7 @@
             randomize_order: true
         };
         
-        timeline.push(tut_learn_procedure)
+        //timeline.push(tut_learn_procedure)
 
         var start_tut_train = {
             type: 'html-button-response',
@@ -152,7 +152,7 @@
         };
         
 
-        timeline.push(start_tut_train)
+        //timeline.push(start_tut_train)
         
         
         var three_target = {
@@ -218,7 +218,7 @@
             randomize_order: true
         };
         
-        timeline.push(tut_pract_procedure);
+        //timeline.push(tut_pract_procedure);
         
         var start_real_train = {
             type: 'html-button-response',
@@ -229,7 +229,7 @@
             response_ends_trial: true
         };
         
-        timeline.push(start_real_train)
+        //timeline.push(start_real_train)
         
         var three_target_learn = {
             type: 'audio-button-response',
@@ -274,7 +274,7 @@
         };
         
         // five runs for learning One
-        timeline.push(test_learn_procedure_one);
+        //timeline.push(test_learn_procedure_one);
         // timeline.push(test_learn_procedure_one);
         // timeline.push(test_learn_procedure_one);
         // timeline.push(test_learn_procedure_one);
@@ -289,7 +289,7 @@
             response_ends_trial: true
         };
 
-        timeline.push(start_pract_one_screen);
+        //timeline.push(start_pract_one_screen);
 
 
         var three_target_test = {
@@ -336,7 +336,7 @@
         };
 
         // four of these for testing/training
-        timeline.push(test_pract_procedure_one);
+        //timeline.push(test_pract_procedure_one);
         // timeline.push(test_pract_procedure_one);
         // timeline.push(test_pract_procedure_one);
         // timeline.push(test_pract_procedure_one);
@@ -381,53 +381,11 @@
         };   
 
         // 4 runs for testing/practicing
-        timeline.push(test_pract_procedure_two);
+        //timeline.push(test_pract_procedure_two);
         // timeline.push(test_pract_procedure_two);
         // timeline.push(test_pract_procedure_two);
         // timeline.push(test_pract_procedure_two);
         
-
-
-        var bhtml = '<div class="wrapper">'
-            bhtml += '<div><button><img src=_image/%choice%i.png></button></div>'
-            bhtml += '</div>';
-
-        var bhtmt = '<div class="wrapper">'
-            bhtmt += '<div class="img-btn-small"><button><img src=_image/%choice%i.png></button></div>'        
-            bhtml += '</div>';
-
-
-        var buttons2 = '<div class="menu-container">'
-            buttons2 += '<div class="button-container">'
-            
-            buttons2 += '<div class="img-btn-small">'
-            buttons2 += '<img src=_image/%choice%i.png alt=%choice% width="100" height="100">'
-            buttons2 += '</div>'
-
-            buttons2 += '</div>'
-            buttons2 += '</div>';
-
-
-
-        var buttons3 = '<div class="wrapper">'
-            buttons3 += '<div class="img-btn-small">'
-            buttons3 += '<img src=_image/%choice%i.png alt=%choice% width="100" height="100">'
-            buttons3 += '</div>'
-            buttons3 += '</div>';
-
-        var buttons4 = '<div class="grid">'
-            buttons4 += '<div class="cell">'
-            buttons4 += '<div class="img-btn-small">'
-            buttons4 += '<img src=_image/%choice%i.png alt=%choice% width="100" height="100">'
-            buttons4 += '</div>'
-            buttons4 += '</div>'
-            buttons4 += '</div>';
-
-        var buttons5 = '<div class="grid-container">'
-            buttons5 +='<div class="img-button-small">'
-            buttons5 += '<img src=_image/%choice%i.png alt=%choice% width="100" height="100">'
-            buttons5 += '</div>'
-            buttons5 += '</div>'
 
 
         var nine_target_show = {
@@ -490,18 +448,25 @@
 
             on_finish: function(data) {
                 var acc = false;
-                var used_button = data.button_pressed;
-                var given_response = jsPsych.timelineVariable('choices')[used_button];
-                var correct_response = data.correct_index;
+                //var used_button = data.button_pressed;
+                //var given_response = jsPsych.timelineVariable('choices')[used_button];
+                // console.log("used_button");
+                // console.log(used_button);
+                //console.log("given_response");
+                //console.log(given_response);
 
-                console.log("post-shuffle correct button:\n");
-                console.log(correct_response);
+
+                var real_correct_response = data.new_correct_index;
+
+                console.log("real_correct_response:");
+                console.log(real_correct_response);
+                
                 console.log("data.button_pressed");
                 console.log(data.button_pressed);
 
                 
                 
-                if (correct_response == data.button_pressed) {
+                if (real_correct_response == data.button_pressed) {
                     acc = true;
                 }
                 data.accuracy = acc;

@@ -131,7 +131,10 @@ var learn_trial_info_one = [
     }
 ];
 
-//A1p, A2p, A3p, B1p, B2p, B3p, C1p, C2p, C3p
+//A1p, A2p, A3p (ma) 
+//B1p, B2p, B3p (yi)
+//C1p, C2p, C3p (ne)
+
 var nine_trial_info = [
     {
         target: "_a1",
@@ -191,7 +194,7 @@ var nine_trial_info = [
         target: "_b1",
         target_image: "_image/_b1i.png",
         target_audio: "_audio/_b1s.wav",
-        target_video: "_video/ne1n.mp4",        
+        target_video: "_video/yi1n.mp4",        
         other_im_1:"_image/_a1i.png",
         other_im_2:"_image/_a2i.png",
         other_im_3:"_image/_a3i.png",
@@ -209,7 +212,7 @@ var nine_trial_info = [
         target: "_b2",
         target_image: "_image/_b2i.png",
         target_audio: "_audio/_b2s.wav",
-        target_video: "_video/ne2n.mp4", 
+        target_video: "_video/yi2n.mp4", 
         other_im_1:"_image/_a1i.png",
         other_im_2:"_image/_a2i.png",
         other_im_3:"_image/_a3i.png",
@@ -227,7 +230,7 @@ var nine_trial_info = [
         target: "_b3",
         target_image: "_image/_b3i.png",
         target_audio: "_audio/_b3s.wav",
-        target_video: "_video/ne4n.mp4", 
+        target_video: "_video/yi4n.mp4", 
         other_im_1:"_image/_a1i.png",
         other_im_2:"_image/_a2i.png",
         other_im_3:"_image/_a3i.png",
@@ -245,7 +248,7 @@ var nine_trial_info = [
         target: "_c1",
         target_image: "_image/_c1i.png",
         target_audio: "_audio/_c1s.wav",
-        target_video: "_video/yi1n.mp4", 
+        target_video: "_video/ne1n.mp4", 
         other_im_1:"_image/_a1i.png",
         other_im_2:"_image/_a2i.png",
         other_im_3:"_image/_a3i.png",
@@ -263,7 +266,7 @@ var nine_trial_info = [
         target: "_c2",
         target_image: "_image/_c2i.png",
         target_audio: "_audio/_c2s.wav",
-        target_video: "_video/yi2n.mp4",        
+        target_video: "_video/ne2n.mp4",        
         other_im_1:"_image/_a1i.png",
         other_im_2:"_image/_a2i.png",
         other_im_3:"_image/_a3i.png",
@@ -281,7 +284,7 @@ var nine_trial_info = [
         target: "_c3",
         target_image: "_image/_c3i.png",
         target_audio: "_audio/_c3s.wav",
-        target_video: "_video/yi4n.mp4", 
+        target_video: "_video/ne4n.mp4", 
         other_im_1:"_image/_a1i.png",
         other_im_2:"_image/_a2i.png",
         other_im_3:"_image/_a3i.png",
