@@ -289,7 +289,7 @@
             response_ends_trial: true
         };
 
-        timeline.push(start_pract_one_screen);
+        //timeline.push(start_pract_one_screen);
 
 
         var three_target_test = {
@@ -336,7 +336,7 @@
         };
 
         // four of these for testing/training
-        timeline.push(test_pract_procedure_one);
+        //timeline.push(test_pract_procedure_one);
         // timeline.push(test_pract_procedure_one);
         // timeline.push(test_pract_procedure_one);
         // timeline.push(test_pract_procedure_one);
@@ -359,7 +359,7 @@
         };   
 
         // five runs for learning Block 2
-        timeline.push(test_learn_procedure_two);
+        //timeline.push(test_learn_procedure_two);
         // timeline.push(test_learn_procedure_two);
         // timeline.push(test_learn_procedure_two);
         // timeline.push(test_learn_procedure_two);
@@ -381,7 +381,7 @@
         };   
 
         // 4 runs for testing/practicing
-        timeline.push(test_pract_procedure_two);
+        //timeline.push(test_pract_procedure_two);
         // timeline.push(test_pract_procedure_two);
         // timeline.push(test_pract_procedure_two);
         // timeline.push(test_pract_procedure_two);
@@ -455,7 +455,10 @@
             stimulus: jsPsych.timelineVariable('target_video'),
             choices: jsPsych.NO_KEYS,
             prompt: jsPsych.timelineVariable('target_video'),
-            sources: [jsPsych.timelineVariable('target_video'),jsPsych.timelineVariable('target_video')],
+            sources: [
+                jsPsych.timelineVariable('target_video'),
+                jsPsych.timelineVariable('target_video')
+                ],
             autoplay: true,
             trial_duration: 4000,
             data: {
@@ -490,9 +493,15 @@
                 var used_button = data.button_pressed;
                 var given_response = jsPsych.timelineVariable('choices')[used_button];
                 var correct_response = data.correct_index;
+
+                console.log("post-shuffle correct button:\n");
+                console.log(correct_response);
+                console.log("pressed button:\n");
+                console.log(data.button_pressed);
+
                 
                 
-                if (data.correct_response == data.button_pressed) {
+                if (correct_response == data.button_pressed) {
                     acc = true;
                 }
                 data.accuracy = acc;
@@ -559,98 +568,16 @@
                 test_learn_beep_audio,
                 test_nine_one_audio,
                 ],
-            preload_video: test_nine_one_video,
+            preload_video: [
+                test_nine_one_video,
+                test_nine_one_video
+                ],
             show_preload_progress_bar: false,
-            use_webaudio: false,
+            use_webaudio: true,
             on_finish: function() {
                 jsPsych.data.displayData();
             }
         })
-
-    // generic JS
-
-    // function shuffle(array) {
-    //   var currentIndex = array.length, temporaryValue, randomIndex;
-
-    //   // While there remain elements to shuffle...
-    //   while (0 !== currentIndex) {
-
-    //     // Pick a remaining element...
-    //     randomIndex = Math.floor(Math.random() * currentIndex);
-    //     currentIndex -= 1;
-
-    //     // And swap it with the current element.
-    //     temporaryValue = array[currentIndex];
-    //     array[currentIndex] = array[randomIndex];
-    //     array[randomIndex] = temporaryValue;
-    //   }
-
-    //   return array;
-    // }
-
-    // function shuffle(originalArray) {
-    //   var array = [].concat(originalArray);
-    //   var currentIndex = array.length, temporaryValue, randomIndex;
-
-    //   // While there remain elements to shuffle...
-    //   while (0 !== currentIndex) {
-
-    //     // Pick a remaining element...
-    //     randomIndex = Math.floor(Math.random() * currentIndex);
-    //     currentIndex -= 1;
-
-    //     // And swap it with the current element.
-    //     temporaryValue = array[currentIndex];
-    //     array[currentIndex] = array[randomIndex];
-    //     array[randomIndex] = temporaryValue;
-    //   }
-
-    //   return array;
-    // }   
-
-    // function shuffleChoiceButtons(choices, correct_choice_string) {
-    //   //check
-    //   console.log('pre-shuffled array:');
-    //   console.log(choices)
-      
-    //   //spec
-    //   var oriIndex = choices.indexOf(correct_choice_string);
-
-    //   //check
-    //   console.log('oriIndex: ');
-    //   console.log(oriIndex);
-      
-    //   var betterChoices = shuffle(choices);
-      
-    //   //check
-    //   console.log('post-shuffled:');
-    //   console.log(betterChoices);
-
-    //   var newIndex = betterChoices.indexOf(correct_choice_string);
-    //   console.log(newIndex);
-
-    //   return {
-    //     choiceList: betterChoices,
-    //     index: newIndex
-    //   };
-    // }
-
-
-    // function getArrayValues(collection: any[], path: (number | string)[] = []) {
-    //   return collection.map((value, index) => {
-    //   return getValue(value, [...path, index])
-    //  })
-    // }
-
-    // function getObjectValues(source: object, path: (number | string)[] = []) {
-    //  return Object.keys(source).map((key) => {
-    //    const value = source[key]
-
-    //    return getValue(value, [...path, key])
-    //  })
-    // }
-
-    //end generic stuff
 
     </script>
 </html>
