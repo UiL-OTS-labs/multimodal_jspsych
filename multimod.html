@@ -18,6 +18,22 @@
   </head>
   <body></body>
   <script>
+        
+        // subject ID and such
+        var subjectID = jsPsych.randomization.randomID(9);
+
+        // random condition for the subject at the start of the experiment
+        var conditionAssigned = jsPsych.randomization.sampleWithoutReplacement([
+            'neutral', 
+            'emotional'
+            ], 1)[0];
+
+         // record the condition assignment in the jsPsych data
+        // add properties 'subject' and 'emotion_condition' to every trial
+        jsPsych.data.addProperties({
+            subject: subjectID,
+            emotion_condition: conditionAssigned
+        });
 
         var timeline = [];
 
