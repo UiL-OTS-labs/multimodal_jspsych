@@ -11,7 +11,7 @@
 jsPsych.plugins["audio-button-response-random"] = (function() {
 	var plugin = {};
 
-	jsPsych.pluginAPI.registerPreload('audio-button-response', 'stimulus', 'audio');
+	jsPsych.pluginAPI.registerPreload('audio-button-response-random', 'stimulus', 'audio');
 
 	plugin.info = {
 		name: 'audio-button-response-random',
@@ -102,7 +102,6 @@ jsPsych.plugins["audio-button-response-random"] = (function() {
     
 
       // To shuffle choices
-      
     function shuffleChoices(oriArray) {
       var array = [].concat(oriArray);
       var currentIndex = array.length, temporaryValue, randomIndex;
@@ -144,6 +143,7 @@ jsPsych.plugins["audio-button-response-random"] = (function() {
       console.log(betterChoices);
 
       var newIndex = betterChoices.indexOf(correctString);
+      
       console.log('newIndex: ');
       console.log(newIndex);
 
@@ -157,16 +157,29 @@ jsPsych.plugins["audio-button-response-random"] = (function() {
 
   	//display buttons
     var buttons = [];
-    //
+    
+    // returns a shuffled array of choices
     var shuffledChoices = shuffleChoices(trial.choices);
-
+    
+    // returns
     var shuffledObject = choiceButtons(shuffledChoices, trial.data.target);
-    //console.log(trial.data.target)
+
+    console.log("the shuffledObject:")
+    console.log(shuffledObject);
+
+    
+    console.log("Looking for this one: ")
+    console.log(trial.data.target)
+    
     var correctButton = shuffledObject.index;
+    var currentShuffle = shuffledObject.choiceList;
+
+    console.log("The currentShuffle.choiceList:");
+    console.log(currentShuffle);
 
     var oriButton = shuffledObject.indexOri;
     
-    console.log('correctButton')
+    console.log('new correctButton')
     console.log(correctButton)
     
     if (Array.isArray(trial.button_html)) {
@@ -182,9 +195,9 @@ jsPsych.plugins["audio-button-response-random"] = (function() {
     }
 
     var html = '<div id="jspsych-audio-button-response-btngroup">';
-    for (var i = 0; i < shuffledChoices.length; i++) {
-      var str = buttons[i].replace(/%choice%/g, shuffledChoices[i]);
-      html += '<div class="jspsych-audio-button-response-button" style="cursor: pointer; display: inline-block; margin:'+trial.margin_vertical+' '+trial.margin_horizontal+'" id="jspsych-audio-button-response-button-' + i +'" data-choice="'+i+'">'+str+'</div>';
+    for (var i = 0; i < currentShuffle.length; i++) {
+      var str = buttons[i].replace(/%choice%/g, currentShuffle[i]);
+      html += '<div class="jspsych-audio-button-response-button-random" style="cursor: pointer; display: inline-block; margin:'+trial.margin_vertical+' '+trial.margin_horizontal+'" id="jspsych-audio-button-response-button-' + i +'" data-choice="'+i+'">'+str+'</div>';
     }
 		html += '</div>';
 
@@ -195,7 +208,7 @@ jsPsych.plugins["audio-button-response-random"] = (function() {
 
 		display_element.innerHTML = html;
 
-		for (var i = 0; i < shuffledChoices.length; i++) {
+		for (var i = 0; i < currentShuffle.length; i++) {
       display_element.querySelector('#jspsych-audio-button-response-button-' + i).addEventListener('click', function(e){
         var choice = e.currentTarget.getAttribute('data-choice'); // don't use dataset for jsdom compatibility
         after_response(choice);
