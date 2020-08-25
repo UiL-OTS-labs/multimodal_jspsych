@@ -124,28 +124,28 @@ jsPsych.plugins["audio-button-response-random"] = (function() {
 
     function choiceButtons(array, correctString) {
       //check
-      console.log('pre-shuffled array:');
-      console.log(array)
-      console.log('this is the correct answer...')
-      console.log(correctString)
+      // console.log('pre-shuffled array:');
+      // console.log(array)
+      // console.log('this is the correct answer...')
+      // console.log(correctString)
       
       //spec
       var oriIndex = array.indexOf(correctString);
 
       //check
-      console.log('oriIndex: ');
-      console.log(oriIndex);
+      // console.log('oriIndex: ');
+      // console.log(oriIndex);
       
       var betterChoices = shuffleChoices(array);
       
       //check
-      console.log('post-shuffled array:');
-      console.log(betterChoices);
+      // console.log('post-shuffled array:');
+      // console.log(betterChoices);
 
       var newIndex = betterChoices.indexOf(correctString);
       
-      console.log('newIndex: ');
-      console.log(newIndex);
+      // console.log('newIndex: ');
+      // console.log(newIndex);
 
       return {
         choiceList: betterChoices,
@@ -164,23 +164,23 @@ jsPsych.plugins["audio-button-response-random"] = (function() {
     // returns
     var shuffledObject = choiceButtons(shuffledChoices, trial.data.target);
 
-    console.log("the shuffledObject:")
-    console.log(shuffledObject);
+    // console.log("the shuffledObject:")
+    // console.log(shuffledObject);
 
     
-    console.log("Looking for this one: ")
-    console.log(trial.data.target)
+    // console.log("Looking for this one: ")
+    // console.log(trial.data.target)
     
     var correctButton = shuffledObject.index;
     var currentShuffle = shuffledObject.choiceList;
 
-    console.log("The currentShuffle.choiceList:");
-    console.log(currentShuffle);
+    // console.log("The currentShuffle.choiceList:");
+    // console.log(currentShuffle);
 
     var oriButton = shuffledObject.indexOri;
     
-    console.log('new correctButton')
-    console.log(correctButton)
+    // console.log('new correctButton')
+    // console.log(correctButton)
     
     if (Array.isArray(trial.button_html)) {
       if (trial.button_html.length == trial.choices.length) {
