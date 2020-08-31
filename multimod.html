@@ -53,7 +53,8 @@
         //  
         var test_nine_neut = nine_trial_info_neutral;
         var test_nine_emo = nine_trial_info_emotional;
-        var test_nine_mixed = 'todo'; 
+        
+        var test_nine_mixed = [].concat(nine_trial_info_neutral, nine_trial_info_emotional); 
         //var test_nine_two = nine_trial_info; //todo: two!
 
         var test_beep = ['_audio/beep.mp3']
@@ -546,15 +547,15 @@
 
 
         var test_nine_procedure_neut = {
-            timeline:[nine_target_show, single_video_learn, nine_target_choose],
+            timeline:[single_video_learn, nine_target_choose],
             timeline_variables: test_nine_neut,
             randomize_order: true,
         };
 
 
         var test_nine_procedure_emo = {
-            timeline:[nine_target_show, single_video_learn, nine_target_choose],
-            timeline_variables: test_nine_emo,
+            timeline:[single_video_learn, nine_target_choose],
+            timeline_variables: test_nine_mixed,
             randomize_order: true,
         };
 
