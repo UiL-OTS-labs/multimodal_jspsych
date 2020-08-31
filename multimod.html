@@ -28,7 +28,10 @@
             'emotional'
             ], 1)[0];
 
-         // record the condition assignment in the jsPsych data
+        console.log('assigned to: ')
+        console.log(conditionAssigned)
+
+        // record the condition assignment in the jsPsych data
         // add properties 'subject' and 'emotion_condition' to every trial
         jsPsych.data.addProperties({
             subject: subjectID,
@@ -38,16 +41,19 @@
         var timeline = [];
 
         // shorthand for the "js/tutorial.js" additional structure
-        var tut_learn = tut_learn_trial_info
-        var tut_pract = tut_pract_trial_info 
+        var tut_learn = tut_learn_trial_info;
+        var tut_pract = tut_pract_trial_info;
         // learning & testing Block 1 (same  trial info)
-        var test_learn_one = learn_trial_info_one
-        var test_pract_one = learn_trial_info_one  
+        var test_learn_one = learn_trial_info_one;
+        var test_pract_one = learn_trial_info_one; 
         //  Block 2 leaning and testing
-        var test_learn_two = learn_trial_info_two
-        var test_pract_two = learn_trial_info_two
-
-        var test_nine_one = nine_trial_info;
+        var test_learn_two = learn_trial_info_two;
+        var test_pract_two = learn_trial_info_two;
+        
+        //  
+        var test_nine_neut = nine_trial_info_neutral;
+        var test_nine_emo = nine_trial_info_emotional;
+        var test_nine_mixed = 'todo'; 
         //var test_nine_two = nine_trial_info; //todo: two!
 
         var test_beep = ['_audio/beep.mp3']
@@ -95,16 +101,28 @@
             console.log('Pre-loaded learn beep audio')
         };
 
-        var test_nine_one_audio = [];
-        for (var i=0; i<test_nine_one.length; i++) {
-            test_nine_one_audio.push(test_nine_one[i].target_audio);
-            console.log('Pre-loaded nine choices audio')
+        var test_nine_neut_audio = [];
+        for (var i=0; i<test_nine_neut.length; i++) {
+            test_nine_neut_audio.push(test_nine_neut[i].target_audio);
+            console.log('Pre-loaded nine choices neutral audio')
         };
 
-        var test_nine_one_video = [];
-        for (var i=0; i<test_nine_one.length; i++) {
-            test_nine_one_video.push(test_nine_one[i].target_video);
-            console.log('Pre-loaded nine choices video')
+        var test_nine_neut_video = [];
+        for (var i=0; i<test_nine_neut.length; i++) {
+            test_nine_neut_video.push(test_nine_neut[i].target_video);
+            console.log('Pre-loaded nine choices video neutral')
+        };
+
+        var test_nine_emo_audio = [];
+        for (var i=0; i<test_nine_emo.length; i++) {
+            test_nine_emo_audio.push(test_nine_emo[i].target_audio);
+            console.log('Pre-loaded nine choices emotional audio (useless== the same, but well...');
+        };
+
+        var test_nine_emo_video = [];
+        for (var i=0; i<test_nine_emo.length; i++) {
+            test_nine_emo_video.push(test_nine_emo[i].target_video);
+            console.log('Pre-loaded nine choices video emotional')
         };
 
         // General instructiona
@@ -403,6 +421,12 @@
         // timeline.push(test_pract_procedure_two);
         
 
+        // we now get to conditional timelines
+
+        var condition_neut = [];
+        var condition_emo =[];
+
+
 
         var nine_target_show = {
             type: 'audio-button-response-random',
@@ -420,7 +444,6 @@
                 task_part: jsPsych.timelineVariable('task_part'),
                 target: jsPsych.timelineVariable('target')
                 },
-        
         }; 
 
 
@@ -474,11 +497,11 @@
 
                 var real_correct_response = data.new_correct_index;
 
-                console.log("real_correct_response:");
-                console.log(real_correct_response);
+                // console.log("real_correct_response:");
+                // console.log(real_correct_response);
                 
-                console.log("data.button_pressed");
-                console.log(data.button_pressed);
+                // console.log("data.button_pressed");
+                // console.log(data.button_pressed);
 
                 
                 
@@ -521,13 +544,31 @@
         //     }
         // };
 
-        var test_nine_procedure_one = {
+
+        var test_nine_procedure_neut = {
             timeline:[nine_target_show, single_video_learn, nine_target_choose],
-            timeline_variables: test_nine_one,
+            timeline_variables: test_nine_neut,
             randomize_order: true,
         };
 
-        timeline.push(test_nine_procedure_one);
+
+        var test_nine_procedure_emo = {
+            timeline:[nine_target_show, single_video_learn, nine_target_choose],
+            timeline_variables: test_nine_emo,
+            randomize_order: true,
+        };
+
+        if (conditionAssigned == 'neutral') { 
+            timeline.push(test_nine_procedure_neut)
+            console.log('neutral groepie');
+        }
+        else if (conditionAssigned == 'emotional') {
+            timeline.push(test_nine_procedure_emo);
+            console.log('emotional groepie');
+        }
+        else {
+            console.log('wut? no conditionAssigned?');
+        };
 
         var end_screen = {
             type: 'html-keyboard-response',
@@ -547,11 +588,12 @@
                 test_learn_two_audio, 
                 test_pract_two_audio,
                 test_learn_beep_audio,
-                test_nine_one_audio,
+                test_nine_neut_audio,
+                test_nine_emo_audio,//senseless, but consistent (todo)
                 ],
             preload_video: [
-                test_nine_one_video,
-                test_nine_one_video
+                test_nine_neut_video,
+                test_nine_emo_video
                 ],
             show_preload_progress_bar: false,
             use_webaudio: true,
