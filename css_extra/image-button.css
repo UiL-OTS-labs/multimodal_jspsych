@@ -117,7 +117,7 @@ img {
     margin: 5px;
 }
 
-#jspsych-html-button-response-btngroup {
+#jspsych-html-button-response-btngroup-nine {
     display: grid;
     grid-template-rows: calc(100% / 3) calc(100% / 3) calc(100% / 3);
     grid-template-columns: calc(100% / 3) calc(100% / 3) calc(100% / 3);

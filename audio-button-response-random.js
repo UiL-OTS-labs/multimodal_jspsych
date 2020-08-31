@@ -172,7 +172,7 @@ jsPsych.plugins["audio-button-response-random"] = (function() {
     // console.log(trial.data.target)
     
     var correctButton = shuffledObject.index;
-    var currentShuffle = shuffledObject.choiceList;
+    var currentShuffle = shuffledObject.choiceList; //imnportant one!
 
     // console.log("The currentShuffle.choiceList:");
     // console.log(currentShuffle);
@@ -194,10 +194,10 @@ jsPsych.plugins["audio-button-response-random"] = (function() {
       }
     }
 
-    var html = '<div id="jspsych-audio-button-response-btngroup">';
+    var html = '<div id="jspsych-audio-button-response-btngroup-nine">';
     for (var i = 0; i < currentShuffle.length; i++) {
       var str = buttons[i].replace(/%choice%/g, currentShuffle[i]);
-      html += '<div class="jspsych-audio-button-response-button-random" style="cursor: pointer; display: inline-block; margin:'+trial.margin_vertical+' '+trial.margin_horizontal+'" id="jspsych-audio-button-response-button-' + i +'" data-choice="'+i+'">'+str+'</div>';
+      html += '<div class="jspsych-audio-button-response-button" style="cursor: pointer; display: inline-block; margin:'+trial.margin_vertical+' '+trial.margin_horizontal+'" id="jspsych-audio-button-response-button-' + i +'" data-choice="'+i+'">'+str+'</div>';
     }
 		html += '</div>';
 
