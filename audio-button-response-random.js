@@ -209,7 +209,7 @@ jsPsych.plugins["audio-button-response-random"] = (function() {
 		display_element.innerHTML = html;
 
 		for (var i = 0; i < currentShuffle.length; i++) {
-      display_element.querySelector('#jspsych-audio-button-response-button-' + i).addEventListener('click', function(e){
+      display_element.querySelector('#jspsych-audio-button-response-button-random-' + i).addEventListener('click', function(e){
         var choice = e.currentTarget.getAttribute('data-choice'); // don't use dataset for jsdom compatibility
         after_response(choice);
       });
