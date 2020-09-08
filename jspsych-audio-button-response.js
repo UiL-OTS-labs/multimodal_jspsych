@@ -8,13 +8,13 @@
  *
  **/
 
-jsPsych.plugins["audio-button-response-random"] = (function() {
+jsPsych.plugins["audio-button-response"] = (function() {
 	var plugin = {};
 
-	jsPsych.pluginAPI.registerPreload('audio-button-response-random', 'stimulus', 'audio');
+	jsPsych.pluginAPI.registerPreload('audio-button-response', 'stimulus', 'audio');
 
 	plugin.info = {
-		name: 'audio-button-response-random',
+		name: 'audio-button-response',
 		description: '',
 		parameters: {
 			stimulus: {
@@ -88,6 +88,7 @@ jsPsych.plugins["audio-button-response-random"] = (function() {
       var audio = jsPsych.pluginAPI.getAudioBuffer(trial.stimulus);
       audio.currentTime = 0;
     }
+
     // set up end event if trial needs it
     if(trial.trial_ends_after_audio){
       if(context !== null){
@@ -99,88 +100,8 @@ jsPsych.plugins["audio-button-response-random"] = (function() {
       }
     }
 
-
-      // To shuffle choices
-    function shuffleChoices(oriArray) {
-      var array = [].concat(oriArray);
-      var currentIndex = array.length, temporaryValue, randomIndex;
-
-      // While there remain elements to shuffle...
-      while (0 !== currentIndex) {
-
-        // Pick a remaining element...
-        randomIndex = Math.floor(Math.random() * currentIndex);
-        currentIndex -= 1;
-
-        // And swap it with the current element.
-        temporaryValue = array[currentIndex];
-        array[currentIndex] = array[randomIndex];
-        array[randomIndex] = temporaryValue;
-      }
-    return array;
-    }
-
-
-    function choiceButtons(array, correctString) {
-      //check
-      // console.log('pre-shuffled array:');
-      // console.log(array)
-      // console.log('this is the correct answer...')
-      // console.log(correctString)
-
-      //spec
-      var oriIndex = array.indexOf(correctString);
-
-      //check
-      // console.log('oriIndex: ');
-      // console.log(oriIndex);
-
-      var betterChoices = shuffleChoices(array);
-
-      //check
-      // console.log('post-shuffled array:');
-      // console.log(betterChoices);
-
-      var newIndex = betterChoices.indexOf(correctString);
-
-      // console.log('newIndex: ');
-      // console.log(newIndex);
-
-      return {
-        choiceList: betterChoices,
-        indexOri: oriIndex,
-        index: newIndex
-      };
-    }
-
-
   	//display buttons
     var buttons = [];
-
-    // returns a shuffled array of choices
-    var shuffledChoices = shuffleChoices(trial.choices);
-
-    // returns
-    var shuffledObject = choiceButtons(shuffledChoices, trial.data.target);
-
-    // console.log("the shuffledObject:")
-    // console.log(shuffledObject);
-
-
-    // console.log("Looking for this one: ")
-    // console.log(trial.data.target)
-
-    var correctButton = shuffledObject.index;
-    var currentShuffle = shuffledObject.choiceList; //imnportant one!
-
-    // console.log("The currentShuffle.choiceList:");
-    // console.log(currentShuffle);
-
-    var oriButton = shuffledObject.indexOri;
-
-    // console.log('new correctButton')
-    // console.log(correctButton)
-
     if (Array.isArray(trial.button_html)) {
       if (trial.button_html.length == trial.choices.length) {
         buttons = trial.button_html;
@@ -194,8 +115,8 @@ jsPsych.plugins["audio-button-response-random"] = (function() {
     }
 
     var html = '<div id="jspsych-audio-button-response-btngroup">';
-    for (var i = 0; i < currentShuffle.length; i++) {
-      var str = buttons[i].replace(/%choice%/g, currentShuffle[i]);
+    for (var i = 0; i < trial.choices.length; i++) {
+      var str = buttons[i].replace(/%choice%/g, trial.choices[i]);
       html += '<div class="jspsych-audio-button-response-button" style="cursor: pointer; display: inline-block; margin:'+trial.margin_vertical+' '+trial.margin_horizontal+'" id="jspsych-audio-button-response-button-' + i +'" data-choice="'+i+'">'+str+'</div>';
     }
 		html += '</div>';
@@ -207,7 +128,7 @@ jsPsych.plugins["audio-button-response-random"] = (function() {
 
 		display_element.innerHTML = html;
 
-		for (var i = 0; i < currentShuffle.length; i++) {
+		for (var i = 0; i < trial.choices.length; i++) {
       display_element.querySelector('#jspsych-audio-button-response-button-' + i).addEventListener('click', function(e){
         var choice = e.currentTarget.getAttribute('data-choice'); // don't use dataset for jsdom compatibility
         after_response(choice);
@@ -217,8 +138,7 @@ jsPsych.plugins["audio-button-response-random"] = (function() {
     // store response
     var response = {
       rt: null,
-      button: null,
-      correctIndex: null,
+      button: null
     };
 
     // function to handle responses by the subject
@@ -229,7 +149,6 @@ jsPsych.plugins["audio-button-response-random"] = (function() {
       var rt = end_time - start_time;
       response.button = choice;
       response.rt = rt;
-      response.correctIndex = correctButton
 
       // disable all the buttons after a response
       var btns = document.querySelectorAll('.jspsych-audio-button-response-button button');
@@ -263,8 +182,7 @@ jsPsych.plugins["audio-button-response-random"] = (function() {
       var trial_data = {
         "rt": response.rt,
         "stimulus": trial.stimulus,
-        "button_pressed": response.button,
-        "new_correct_index": response.correctIndex
+        "button_pressed": response.button
       };
 
       // clear the display
